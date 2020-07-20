@@ -1,0 +1,134 @@
+﻿
+@model IEnumerable<jQueryDatatableServerSideNetCore.Models.DatabaseModels.Camera>
+
+@{ ViewData["Title"] = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+        <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/sl-1.3.1/datatables.min.js"></script>
+            -->
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            /* Create two equal columns that floats next to each other */
+            .columnCameraList {
+                float: left;
+                width: 25%;
+                padding: 10px;
+                              }
+            .table.dataTable {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 1px;
+            }
+            .columnCameraImage {
+                float: right;
+                width: 75%;
+                padding-left: 75px;
+            }
+
+            .cameraWindow {
+                width: 33%;
+                border-width: 1px;
+                border-color: royalblue;
+                border-style: solid;
+                height: 33%;
+                padding: 2px;
+                float: left;
+                align-content: center;
+                text-align: center;
+                align-items: center;
+            }
+
+            .selectedCamera {
+                background-color: black;
+                color: mediumblue;
+                border: midnightblue;
+                border-width: 30px;
+                border-style: solid;
+            }
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+        </style>
+        <title>Cameras</title>
+    </head>
+    <body>
+        <div class="columnCameraList">
+            <div id="example" class="example">
+
+                <table id="AppDataTable" class="display" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Department</th>
+                            <th>Location</th>
+                            <th>History</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Loading..</td>
+                            <td>Loading..</td>
+                            <td>Loading..</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div id="existingDiv" class="columnCameraImage">
+
+           
+        </div>
+
+
+
+        @section Styles{
+             <link rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" />
+               <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/r-2.2.5/datatables.min.css" />
+
+        }
+
+        @section Scripts{
+
+
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                    crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/sl-1.3.1/datatables.min.js"></script>
+
+            <script src="~/js/app.js" asp-append-version="true"></script>
+           <!-- <script src="/js/app.js?v=ynrCH6Eyn95AvmGLETdjPMCCA0FtZr2r1g2LWOjHGkY"></script>
+            <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" />-->
+           <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                    crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/sl-1.3.1/datatables.min.js"></script>
+
+
+            <script src="~/js/app.js" asp-append-version="true"></script> -->
+        }
+
+
+    </body>
